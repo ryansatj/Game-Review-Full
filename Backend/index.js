@@ -7,6 +7,14 @@ const cors = require("cors");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors({
+    origin: 'https://game-review-full.vercel.app', // Replace with your frontend URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+  }));
+  
+  // Handle preflight requests
+  app.options('*', cors());
 
 connectDB.connectDB();
 app.use(routes);
